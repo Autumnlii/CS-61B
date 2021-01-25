@@ -31,6 +31,26 @@ package lecture;
 
 public class SList {
 
+    public static void main (String[] args) {
+        SList l = new SList(10);
+        l.addFirst(10);
+        l.addFirst(5);
+        l.addLast(9);
+        System.out.println(l.getFirst());
+        System.out.println(l.size());
+
+        SList b = new SList();
+        b.addFirst(10);
+        b.addFirst(5);
+        b.addLast(9);
+        System.out.println(b.getFirst());
+        System.out.println(b.size());
+
+        IntNode test = new IntNode(5, null);
+        System.out.println(l.oddEvenList(test));
+
+    }
+
     private static class IntNode {
         public int item;
         public IntNode next;
@@ -61,22 +81,7 @@ public class SList {
 
     }
 
-    public static void main (String[] args) {
-        SList l = new SList(10);
-        l.addFirst(10);
-        l.addFirst(5);
-        l.addLast(9);
-        System.out.println(l.getFirst());
-        System.out.println(l.size());
 
-        SList b = new SList();
-        b.addFirst(10);
-        b.addFirst(5);
-        b.addLast(9);
-        System.out.println(b.getFirst());
-        System.out.println(b.size());
-
-    }
 
     public int getFirst () {
         return sentinel.next.item;
@@ -120,6 +125,23 @@ public class SList {
         return size;
     }
 
+    public IntNode oddEvenList(IntNode head) {
+        if(head == null) {
+            return null;
+        }
+        IntNode odd = head;
+        IntNode even = head.next;
+        IntNode evenhead = even;
+
+        while(even != null && even.next != null) {
+            odd.next = even.next;
+            odd = odd.next;
+            even.next  = odd.next;
+            even = even.next;
+        }
+        odd.next = evenhead;
+        return head;
+    }
 
 
 }
